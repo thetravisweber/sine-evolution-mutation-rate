@@ -4,7 +4,7 @@ let population = [];
 function setup() {
   createCanvas(500, 400);
   rectMode(CORNERS);
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 1; i++) {
     population[i] = genesis();
   }
 }

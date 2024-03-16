@@ -1,14 +1,9 @@
-class Froig {
-  constructor(DNA) {
-    this.DNA = DNA;
-  }
-
+class Froig extends ReplicatorWithMutationRate {
   draw() {
     for (let x = 0; x < width; x+=density) {
       let y = displayWarp(this.action(x));
       rect(x,height/2,x+density,y);
     }
-    noLoop();
   }
 
   // the only phenotype is the output based on x
