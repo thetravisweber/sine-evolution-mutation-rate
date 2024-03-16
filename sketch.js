@@ -4,15 +4,23 @@ let population = [];
 function setup() {
   createCanvas(500, 400);
   rectMode(CORNERS);
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 5; i++) {
     population[i] = genesis();
   }
+  frameRate(1);
 }
 
 function draw() {
   background(220);
   drawExpectedFunction();
   drawPopulation();
+  nextGeneration();
+}
+
+function nextGeneration() {
+  for (let i = 0; i < population.length; i++) {
+    population[i] = population[i].makeClone();
+  }
 }
 
 function drawExpectedFunction() {
