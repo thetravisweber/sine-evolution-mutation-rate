@@ -1,9 +1,14 @@
-class ReplicatorWithMutationRate {
+class Replicator {
   constructor(DNA) {
-    // last DNA spot retained for being the mutation rate
     this.DNA = DNA;
+    // Provide a place to cache fitness, since calculation is expensive
+    this.fitness = undefined;
   }
 
+  // interface should have makeClone and reproduceSexually, but not needed for this experiment
+}
+
+class ReplicatorWithMutationRate extends Replicator {
   makeClone() {
     let protoDNA = [];
     for (let i = 0; i < this.DNA.length; i++) {
