@@ -4,23 +4,40 @@ let population = [];
 function setup() {
   createCanvas(500, 400);
   rectMode(CORNERS);
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 100; i++) {
     population[i] = genesis();
   }
-  frameRate(1);
+  frameRate(60);
 }
 
 function draw() {
   background(220);
   drawExpectedFunction();
   drawPopulation();
-  nextGeneration();
+  if (frameCount % 10 == 0) {
+    nextGeneration();
+  }
+}
+// Yes, it only returns even numbers of population
+function nextGeneration() {
+  let oldGeneration = [...population];
+  population = [];
+  oldGeneration.sort((a, b) => fitness(b) - fitness(a));
+  // Each of top 50 percentile gets to make a baby
+  for (let i = 0; i < oldGeneration.length / 2; i++) {
+    population.push(oldGeneration[i]);
+    population.push(oldGeneration[i].makeClone());
+  }
 }
 
-function nextGeneration() {
-  for (let i = 0; i < population.length; i++) {
-    population[i] = population[i].makeClone();
+function fitness(froig) {
+  let totalDistance = 0;
+  for (let x = 0; x <= width; x+=density) {
+    totalDistance += abs(expected(x) - froig.action(x))**2;
   }
+  let averageDistance = totalDistance / (width / density);
+  // invert it, because higher fitness should have less average distance
+  return -averageDistance;
 }
 
 function drawExpectedFunction() {
@@ -37,6 +54,8 @@ function drawExpectedFunction() {
 
 function expected(x) {
   let larped = map(x, 0, width, 0, TWO_PI);
+  // We want 1 full cycle every minute
+  // let shift = (frameCount % 100) * TWO_PI;
   return sin(larped);
 }
 
@@ -51,10 +70,3 @@ function drawPopulation() {
     entity.draw();
   }
 }
-
-
-// function fitness(froig) {
-//   for (let x = 0; x <= width; x+=density) {
-
-//   }
-// }
