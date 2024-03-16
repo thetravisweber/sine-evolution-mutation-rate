@@ -1,0 +1,13 @@
+{
+  "name": "mutation-rate-sine",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "echo 'Start by reading README.md please'",
+    "experiment1": "http-server ./experiment1/",
+    "experiment2": "http-server ./experiment2/"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "p5": "^1.9.1"
+  }
+}
