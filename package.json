@@ -2,7 +2,7 @@
   "name": "mutation-rate-sine",
   "version": "0.0.0",
   "scripts": {
-    "start": "echo 'Start by reading README.md please'",
+    "start": "http-server",
     "experiment1": "http-server ./experiment1/",
     "experiment2": "http-server ./experiment2/"
   },
