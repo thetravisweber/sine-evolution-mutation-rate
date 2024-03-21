@@ -1,3 +1,6 @@
+require("../shared/EvolutionLib/Froig");
+require("../shared/Utils/ExperimentDataCapture");
+
 const density = 5;
 let population = [];
 let experimentDC = new DataCapture();
@@ -17,6 +20,9 @@ function draw() {
   drawPopulation();
   nextGeneration();
   experimentDC.capture();
+  if (frameCount % 200 == 0) {
+    experimentDC.writeToDisk();
+  }
 }
 
 

@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class DataCapture {
   // MR being mutation rate
   alphaMRLog = [];
@@ -8,6 +10,7 @@ class DataCapture {
 
   constructor() {
     this.id = crypto.randomUUID();
+    this.started = Date.now();
   }
 
   capture() {
@@ -22,19 +25,25 @@ class DataCapture {
   }
 
   writeToDisk() {
-    const fs = require('fs');
-
-    let jsonData = { key: 'value' };
-    let jsonString = JSON.stringify(jsonData, null, 2);
-
-    fs.writeFile('data.json', jsonString, (err) => {
+    let jsonString = JSON.stringify(this, null, 2);
+    // naming file by unix time stamp ensures they are in order
+    fs.writeFile(`../data_output/exp-${this.started}/${Date.now()}.json`, jsonString, (err) => {
         if (err) throw err;
         console.log('JSON data is saved.');
     });
   }
+
+  toJSON() {
+    return {
+      "timestamp": new Date().toISOString(),
+      ...this
+    }
+  }
 }
 
-//  Define helper functions
+/***
+ * Helpers
+ */
 function findAlpha() {
   let highestFitness = fitness(population[0]);
   let alpha = population[0];

@@ -1,3 +1,5 @@
+require("./Replicator");
+
 class Froig extends ReplicatorWithMutationRate {
   draw() {
     for (let x = 0; x < width; x+=density) {
