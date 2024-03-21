@@ -20,6 +20,18 @@ class DataCapture {
     this.alphaFitnessLog.push(fitness(alpha));
     this.averageFitnessLog.push(averageFitness());
   }
+
+  writeToDisk() {
+    const fs = require('fs');
+
+    let jsonData = { key: 'value' };
+    let jsonString = JSON.stringify(jsonData, null, 2);
+
+    fs.writeFile('data.json', jsonString, (err) => {
+        if (err) throw err;
+        console.log('JSON data is saved.');
+    });
+  }
 }
 
 //  Define helper functions
