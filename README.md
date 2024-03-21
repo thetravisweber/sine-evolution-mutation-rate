@@ -1,9 +1,10 @@
 # README
 
-cd into `/experiments` folder and run:
 
-`npm install`
-then either
+run `npm install`
+then `npm start`
+
+If you want to run a specific experiment, you can run:
 `npm run experiment1`
 or
 `npm run experiment2`
