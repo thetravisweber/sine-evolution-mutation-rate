@@ -1,12 +1,11 @@
-require("../shared/EvolutionLib/Froig");
-require("../shared/Utils/ExperimentDataCapture");
-
 const density = 5;
 let population = [];
 let experimentDC = new DataCapture();
 
 function setup() {
-  createCanvas(500, 400);
+  let canvas = createCanvas(500, 400);
+  // puts canvas before button in DOM
+  canvas.parent("sketch-canvas");
   rectMode(CORNERS);
   for (let i = 0; i < 100; i++) {
     population[i] = genesis();
@@ -20,9 +19,6 @@ function draw() {
   drawPopulation();
   nextGeneration();
   experimentDC.capture();
-  if (frameCount % 200 == 0) {
-    experimentDC.writeToDisk();
-  }
 }
 
 

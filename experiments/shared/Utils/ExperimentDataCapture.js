@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 class DataCapture {
   // MR being mutation rate
   alphaMRLog = [];
@@ -25,12 +23,18 @@ class DataCapture {
   }
 
   writeToDisk() {
-    let jsonString = JSON.stringify(this, null, 2);
-    // naming file by unix time stamp ensures they are in order
-    fs.writeFile(`../data_output/exp-${this.started}/${Date.now()}.json`, jsonString, (err) => {
-        if (err) throw err;
-        console.log('JSON data is saved.');
-    });
+    const jsonString = JSON.stringify(this, null, 2);
+
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    // naming file by timestamp ensures chronological order
+    a.download = `exp-${this.started}.json`
+    a.click();
+
+    URL.revokeObjectURL(url);
   }
 
   toJSON() {

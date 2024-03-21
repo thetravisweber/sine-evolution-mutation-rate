@@ -14,5 +14,13 @@
 
   <body>
     <script src="./sketch.js"></script>
+    <div id="sketch-canvas"></div>
+    <button onclick="saveDataFile()">Download Data File</button>
   </body>
 </html>
+
+<script>
+function saveDataFile() {
+  experimentDC.writeToDisk();
+}
+</script>
