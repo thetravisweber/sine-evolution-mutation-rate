@@ -40,6 +40,9 @@ class DataCapture {
   toJSON() {
     return {
       "timestamp": new Date().toISOString(),
+      "cycletime": cycleTime,
+      "density": density,
+      "population_size": population.length,
       ...this
     }
   }
@@ -67,6 +70,13 @@ function averageMutationRate() {
   }
   return acc / population.length;
 }
+
+function minimumMutationRate(population) {
+  return population
+    .map(ent => ent.mutationRate())
+    .reduce((min, rate) => rate < min ? rate : min);
+}
+
 
 function averageFitness() {
   let acc = 0;

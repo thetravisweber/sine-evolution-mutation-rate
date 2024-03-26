@@ -1,16 +1,16 @@
-const density = 5;
+const density = 50;
 let population = [];
 let experimentDC = new DataCapture();
+let cycleTime = 3600;
 
 function setup() {
   let canvas = createCanvas(500, 400);
   // puts canvas before button in DOM
   canvas.parent("sketch-canvas");
   rectMode(CORNERS);
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 20; i++) {
     population[i] = genesis();
   }
-  frameRate(20);
 }
 
 function draw() {
@@ -19,7 +19,10 @@ function draw() {
   drawPopulation();
   nextGeneration();
   experimentDC.capture();
-  test(experimentDC.)
+  let amr = experimentDC.averageMRLog[experimentDC.averageMRLog.length - 1];
+  text(amr, 50, 50);
+  let af = experimentDC.averageFitnessLog[experimentDC.averageFitnessLog.length - 1];
+  text(af, 50, 90);
 }
 
 
@@ -62,9 +65,8 @@ function drawExpectedFunction() {
 
 function expected(x) {
   let larped = map(x, 0, width, 0, TWO_PI);
-  // We want 1 full cycle every minute
-  // let shift = (frameCount % 100) * TWO_PI;
-  return sin(larped);
+  let shift = map(frameCount, 0, cycleTime, 0, TWO_PI);
+  return sin(larped + shift);
 }
 
 function displayWarp(y) {
