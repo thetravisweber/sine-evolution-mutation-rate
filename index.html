@@ -1,4 +1,27 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<a href="experiments/experiment1">Experiment 1</a>
-<a href="experiments/experiment2">Experiment 2</a>
+    <title>Experiment 2</title>
+
+    <script src="/node_modules/p5/lib/p5.min.js"></script>
+    <script src="./src/EvolutionLib/Replicator.js"></script>
+    <script src="./src/EvolutionLib/Froig.js"></script>
+    <script src="./src/EvolutionLib/utils.js"></script>
+    <script src="./src/Utils/ExperimentDataCapture.js"></script>
+  </head>
+
+  <body>
+    <script src="./src/sketch.js"></script>
+    <div id="sketch-canvas"></div>
+    <button onclick="saveDataFile()">Download Data File</button>
+  </body>
+</html>
+
+<script>
+function saveDataFile() {
+  experimentDC.writeToDisk();
+}
+</script>

@@ -40,7 +40,10 @@ function drawExpectedFunction() {
 
 function expected(x) {
   let larped = map(x, 0, width, 0, TWO_PI);
-  let shift = map(frameCount, 0, cycleTime, 0, TWO_PI);
+  let shift = 0;
+  if (cycleTime) {
+    shift = map(frameCount, 0, cycleTime, 0, TWO_PI);
+  }
   return sin(larped + shift);
 }
 

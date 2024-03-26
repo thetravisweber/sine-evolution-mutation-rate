@@ -2,9 +2,7 @@
   "name": "mutation-rate-sine",
   "version": "0.0.0",
   "scripts": {
-    "start": "http-server",
-    "experiment1": "http-server ./experiment1/",
-    "experiment2": "http-server ./experiment2/"
+    "start": "http-server"
   },
   "dependencies": {
     "http-server": "^14.1.1",
