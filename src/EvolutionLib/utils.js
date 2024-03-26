@@ -15,7 +15,7 @@ function nextGeneration() {
 function fitness(froig) {
   if (!froig.fitness) {
     let totalDistance = 0;
-    for (let x = 0; x <= width; x+=density) {
+    for (let x = 0; x < width; x+=density) {
       totalDistance += abs(expected(x) - froig.action(x))**2;
     }
     let averageDistance = totalDistance / (width / density);

@@ -1,6 +1,7 @@
 const density = 5;
 let population = [];
 let experimentDC = new DataCapture();
+// set cycle time to 0 to get no
 let cycleTime = 3600;
 
 function setup() {
