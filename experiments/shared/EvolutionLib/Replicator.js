@@ -13,7 +13,11 @@ class ReplicatorWithMutationRate extends Replicator {
   makeClone() {
     let protoDNA = [];
     for (let i = 0; i < this.DNA.length; i++) {
-      protoDNA[i] = this.mutate(this.DNA[i]);
+      if (random() < this.mutationRate()) {
+        protoDNA[i] = this.mutate(this.DNA[i]);
+      } else {
+        protoDNA[i] = this.DNA[i];
+      } 
     }
     // Use this.constructor to reference the constructor of the current instance
     return new this.constructor(protoDNA);
@@ -21,6 +25,11 @@ class ReplicatorWithMutationRate extends Replicator {
 
   mutate(gene) {
     let diff = random(-this.mutationRate(), this.mutationRate())
+    return gene + diff;
+  }
+
+  mutate2(gene) {
+    let diff = random(-.01, .01);
     return gene + diff;
   }
 

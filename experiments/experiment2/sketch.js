@@ -1,4 +1,4 @@
-const density = 50;
+const density = 5;
 let population = [];
 let experimentDC = new DataCapture();
 let cycleTime = 3600;
@@ -8,7 +8,7 @@ function setup() {
   // puts canvas before button in DOM
   canvas.parent("sketch-canvas");
   rectMode(CORNERS);
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 200; i++) {
     population[i] = genesis();
   }
 }
@@ -19,36 +19,11 @@ function draw() {
   drawPopulation();
   nextGeneration();
   experimentDC.capture();
+  stroke(0);
   let amr = experimentDC.averageMRLog[experimentDC.averageMRLog.length - 1];
   text(amr, 50, 50);
   let af = experimentDC.averageFitnessLog[experimentDC.averageFitnessLog.length - 1];
   text(af, 50, 90);
-}
-
-
-// Yes, it only returns even numbers of population
-function nextGeneration() {
-  let oldGeneration = [...population];
-  population = [];
-  oldGeneration.sort((a, b) => fitness(b) - fitness(a));
-  // Each of top 50 percentile gets to make a baby
-  for (let i = 0; i < oldGeneration.length / 2; i++) {
-    population.push(oldGeneration[i]);
-    population.push(oldGeneration[i].makeClone());
-  }
-}
-
-function fitness(froig) {
-  if (!froig.fitness) {
-    let totalDistance = 0;
-    for (let x = 0; x <= width; x+=density) {
-      totalDistance += abs(expected(x) - froig.action(x))**2;
-    }
-    let averageDistance = totalDistance / (width / density);
-    // invert it, because higher fitness should have less average distance
-    froig.fitness = -averageDistance;
-  }
-  return froig.fitness;
 }
 
 function drawExpectedFunction() {

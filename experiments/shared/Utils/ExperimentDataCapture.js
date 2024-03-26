@@ -2,6 +2,7 @@ class DataCapture {
   // MR being mutation rate
   alphaMRLog = [];
   averageMRLog = [];
+  lowestMRLog = [];
   alphaFitnessLog = [];
   averageFitnessLog = [];
   frameCounter = 0;
@@ -16,6 +17,7 @@ class DataCapture {
     let alpha = findAlpha();
     this.alphaMRLog.push(alpha.mutationRate());
     this.averageMRLog.push(averageMutationRate());
+    this.lowestMRLog.push(minimumMutationRate());
 
     // Fitness levels
     this.alphaFitnessLog.push(fitness(alpha));
@@ -71,9 +73,8 @@ function averageMutationRate() {
   return acc / population.length;
 }
 
-function minimumMutationRate(population) {
-  return population
-    .map(ent => ent.mutationRate())
+function minimumMutationRate() {
+  return population.map(ent => ent.mutationRate())
     .reduce((min, rate) => rate < min ? rate : min);
 }
 
