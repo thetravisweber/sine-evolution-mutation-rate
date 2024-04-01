@@ -2,7 +2,7 @@ const density = 5;
 let population = [];
 let experimentDC = new DataCapture();
 // set cycle time to 0 to get no change
-let cycleTime = 0;
+let cycleTime = 10000;
 
 function setup() {
   let canvas = createCanvas(500, 400);
